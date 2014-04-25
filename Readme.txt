@@ -13,7 +13,7 @@ Written by Matthew Monroe for the Department of Energy (PNNL, Richland, WA)
 Copyright 2007, Battelle Memorial Institute.  All Rights Reserved.
 
 E-mail: matthew.monroe@pnnl.gov or matt@alchemistmatt.com
-Website: http://panomics.pnl.gov/ or http://www.sysbio.org/resources/staff/
+Website: http://omics.pnl.gov/ or http://www.sysbio.org/resources/staff/
 -------------------------------------------------------------------------------
 
 Licensed under the Apache License, Version 2.0; you may not use this file except 
