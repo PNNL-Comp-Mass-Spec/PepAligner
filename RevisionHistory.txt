@@ -1,0 +1,18 @@
+PepAligner Revision History
+
+Version 1.2.5228; April 25, 2014
+	- Updated to .NET 4
+
+Version 1.1.4034; January 17, 2011
+	- Updated to Visual Studio 2008
+
+Version 1.0.2895; December 5, 2007
+	- Updated to keep track of any additional information after the peptide sequence in then input file and to include that information in the output file
+
+Version 1.0.2893; December 3, 2007
+	- Added option /A to display the all score-passing alignments in the console
+	- Changed the default gap extend value to 4 (was 0.5)
+	- Changed the default score threshold to 32 (was 30)
+
+Version 1.0.2891; December 1, 2007
+	- Initial release version
