@@ -236,8 +236,7 @@ Public Class clsAlignPeptides
         Dim srInFile As System.IO.StreamReader
         Dim srOutFile As System.IO.StreamWriter
 
-        Dim objMatrix As NAligner.Matrix
-        Dim objPeptideSequence As NAligner.Sequence
+		Dim objPeptideSequence As NAligner.Sequence
 
         Dim blnSuccess As Boolean
 
@@ -250,7 +249,9 @@ Public Class clsAlignPeptides
             End If
 
 
-            ReportProgress("Initializing alignment matrix: " & mMatrixName)
+			ReportProgress("Initializing alignment matrix: " & mMatrixName)
+
+			Dim objMatrix As NAligner.Matrix = Nothing
             If Not InitializeMatrix(objMatrix, mMatrixName) Then
                 Console.WriteLine("Initialization failed")
                 Return False
@@ -396,20 +397,21 @@ Public Class clsAlignPeptides
             objAlignment = NAligner.SmithWatermanGotoh.Align(objPeptideSequence, objProteinSequence, objMatrix, mGapOpenPenalty, mGapExtendPenalty)
             blnSuccess = True
 
+
+			If blnSuccess Then
+				Try
+					WriteAlignmentEntry(srOutFile, objAlignment, intLinesRead, strPeptide.Length, strProteinName, strProteinSequence.Length, strRemainder)
+				Catch ex As Exception
+					Console.WriteLine("Error writing to output file: " & ex.Message)
+					blnSuccess = False
+				End Try
+			End If
+
         Catch ex As Exception
             Console.WriteLine("Error aligning " & strPeptide & " to " & strProteinName & ": " & ex.Message)
             blnSuccess = False
         End Try
 
-        If blnSuccess Then
-            Try
-                WriteAlignmentEntry(srOutFile, objAlignment, intLinesRead, strPeptide.Length, strProteinName, strProteinSequence.Length, strRemainder)
-            Catch ex As Exception
-                Console.WriteLine("Error writing to output file: " & ex.Message)
-                blnSuccess = False
-            End Try
-
-        End If
 
         Return blnSuccess
 

@@ -1,5 +1,8 @@
 PepAligner Revision History
 
+Version 1.2.5381; September 25, 2014
+	- Updated clsParseCommandLine that checks for CR/LF characters in the command line
+
 Version 1.2.5228; April 25, 2014
 	- Updated to .NET 4
 

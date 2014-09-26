@@ -70,9 +70,6 @@ Module modTestFunctions
         Const LOOP_COUNT As Integer = 500
         Dim dtStart As DateTime
 
-        Dim objMatrix As NAligner.Matrix
-        Dim objAligner As NAligner.Alignment
-
         Dim objDisplayer As New clsAlignerBasic
         Dim udtAlignmentStats As clsAlignmentSummary.udtAlignmentStatsType
 
@@ -94,7 +91,7 @@ Module modTestFunctions
         opengap = 10
         extendgap = 0.5
 
-        objMatrix = NAligner.Matrix.Load("BLOSUM62")
+		Dim objMatrix = NAligner.Matrix.Load("BLOSUM62")
 
         '
         ' Example using peptide vs. protein
@@ -108,11 +105,13 @@ Module modTestFunctions
         strProtein2 = ">ProteinB  Protein" & ControlChars.NewLine & GetPeptideVsProtein2()
         objSequence2 = NAligner.Sequence.Parse(strProtein2)
 
+		Dim objAligner As NAligner.Alignment
+
         For intIndex As Integer = 1 To LOOP_COUNT
             strProtein1 = ">PeptideA  Peptide" & ControlChars.NewLine & GetPeptideVsProtein1()
             objSequence1 = NAligner.Sequence.Parse(strProtein1)
 
-            objAligner = NAligner.SmithWatermanGotoh.Align(objSequence1, objSequence2, objMatrix, opengap, extendgap)
+			objAligner = NAligner.SmithWatermanGotoh.Align(objSequence1, objSequence2, objMatrix, opengap, extendgap)
 
             With udtAlignmentStats
                 .AlignmentScore = objAligner.Score
@@ -126,7 +125,7 @@ Module modTestFunctions
         Console.WriteLine("Elapsed time: " & System.DateTime.UtcNow.Subtract(dtStart).TotalSeconds.ToString & " seconds")
         Console.WriteLine()
 
-        Console.WriteLine("Results for peptide vs. protein:")
+		Console.WriteLine("Results for peptide vs. protein:")
         objDisplayer.DisplayResults(objAligner.Sequence1, objAligner.Sequence2, objAligner.MarkupLine, udtAlignmentStats, False)
 
         PromptUser()
